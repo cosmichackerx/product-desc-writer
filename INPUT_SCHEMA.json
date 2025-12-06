@@ -1,0 +1,25 @@
+{
+  "title": "Product Description & Bullets Writer - input schema",
+  "type": "object",
+  "properties": {
+    "products": {
+      "type": "array",
+      "description": "List of products to generate descriptions for",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "features": {"type": "array", "items": {"type": "string"}},
+          "keywords": {"type": "array", "items": {"type": "string"}},
+          "tone": {"type": "string", "enum": ["professional","friendly","luxury","fun"], "default": "professional"},
+          "language": {"type":"string", "default":"en"}
+        },
+        "required": ["title"]
+      }
+    },
+    "use_openai": {"type":"boolean", "default": false, "description": "If true, actor will try to use OPENAI_API_KEY env var or input.openai_api_key"},
+    "openai_api_key": {"type":"string", "description":"Optional: OpenAI API key (prefer env variable OPENAI_API_KEY). If omitted and use_openai=true, actor will fallback to template generator."}
+  },
+  "required": ["products"]
+}
